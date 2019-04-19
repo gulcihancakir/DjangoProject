@@ -13,12 +13,17 @@ context = {
 def news_list(request):
     news = News.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     category=Category.objects.all()
-    context['category']=category
+    context = {
+    'categories':Category.objects.all()
+    }
     context['news']=news
     return render(request, 'news/news_list.html',context)
 
 
 def news_detail(request: HttpRequest, pk):
+    context = {
+    'categories':Category.objects.all()
+    }
     news = get_object_or_404(News, pk=pk)
 
 
@@ -29,6 +34,9 @@ def news_detail(request: HttpRequest, pk):
 
 
 def news_new(request):
+    context = {
+    'categories':Category.objects.all()
+    }
     if request.method == "POST":
         form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
@@ -89,18 +97,27 @@ def news_like(request, pk):
 
 
 def category_list(request):
+    context = {
+    'categories':Category.objects.all()
+    }
     category = Category.objects.order_by('name')
     context['category']= category
     return render(request, 'category/category_list.html', context)
 
 
 def category_detail(request, pk):
+    context = {
+    'categories':Category.objects.all()
+    }
     category = get_object_or_404(Category, pk=pk)
     context['category']=category
     return render(request, 'category/category_detail.html', context)
 
 
 def category_new(request):
+    context = {
+    'categories':Category.objects.all()
+    }
     if request.method == "POST":
         form = CategoryForm(request.POST)
         if form.is_valid:
@@ -109,10 +126,14 @@ def category_new(request):
             return redirect('category_list')
     else:
         form = CategoryForm()
-        return render(request, 'category/category_edit.html', {'form': form})
+        context['form']=form
+        return render(request, 'category/category_edit.html', context)
 
 
 def category_edit(request, pk):
+    context = {
+    'categories':Category.objects.all()
+    }
     category = get_object_or_404(Category, pk=pk)
     if request.method == "POST":
         form = CategoryForm(request.POST, instance=category)
@@ -122,7 +143,8 @@ def category_edit(request, pk):
             return redirect('category_list')
     else:
         form = CategoryForm(instance=category)
-    return render(request, 'category/category_edit.html', {'form': form})
+        context['form']=form
+    return render(request, 'category/category_edit.html', context)
 
 
 def category_delete(request, pk):
