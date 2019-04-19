@@ -1,0 +1,37 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+<!-- Blog Post -->
+
+{% block content %}
+<div class="articles">
+   {% for n in news %}
+
+   <div class="article">
+     <h2> <a href="{% url 'news_detail' pk=n.pk %} ">{{n.title}}</a></h2>
+      <p class="article-published_date" >{{n.published_date}}</p>
+      {% if n.image %}
+      <img class="news-image" src="{{n.image.url}}" alt="News image">
+      
+      {% endif %}
+
+      <p>
+         <i class="fas fa-eye"></i> {{ n.views }}
+      </p>
+
+
+
+
+      <p>{{ n.context|linebreaksbr|slice:":120" }}
+         {% if n.context|length > 100 %}
+         <a href="{% url 'news_detail' pk=n.pk %}">[...]</a>
+         {% endif %}
+
+
+
+
+   </div>
+
+   {% endfor %}
+</div>
+{% endblock %}

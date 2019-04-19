@@ -1,0 +1,37 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+<!-- <a href="{% url 'category_new' %}" class="top-menu"><span class="fas fa-trash-alt"></span></a>
+  <a href="{% url 'category_edit' pk=category.pk %}" class="top-menu"><span class="far fa-edit"></span></a> -->
+  <h2><a href="{% url 'category_detail' pk=category.pk %}">{{category.name}} Haberleri</a></h2>
+<div class="articles">
+  <!-- <h1><a href="{% url 'category_list' %}">Kategoriler</a></h1> -->
+  
+
+
+
+  {% for news in category.news_set.all %}
+  <div class="article">
+  <h3><a href="{% url 'news_detail' pk=news.pk %}">{{news.title}}</a></h3>
+  <!-- <a href="{% url 'news_edit' pk=news.pk %}"><i class="fas fa-edit"></i></a>
+  <a href="{% url 'news_delete' pk=news.pk %}"><i class="fas fa-trash-alt"></i></a> -->
+  <div class="news-published_date">
+  <p>{{news.published_date}} tarihinde yayınlandı</p>
+</div>
+  
+  {% if news.image %}
+      <img class="card-img-top" src="{{news.image.url}}" alt="Card image cap">
+     
+      {% endif %}
+  <p>{{ news.context|linebreaksbr|slice:":120" }}
+    {% if news.context|length > 100 %}
+    <a href="{% url 'news_detail' pk=news.pk %}">[...]</a>
+    {% endif %}
+    <p>
+        <i class="fas fa-eye"></i> {{ news.views }}
+     </p>
+  </div>
+    {% endfor %}
+  
+</div>
+{% endblock %}

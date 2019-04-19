@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="us-en">
+
+<head>
+    <meta http-equiv="content-type" content="text/plain; charset=utf-8" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="author" content="">
+
+  <title>Blog Home </title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<div class="grid-container">
+
+ 
+    <div class="header">
+
+      
+        <form action="{% url 'news_new'  %}">
+          {% csrf_token %}
+          <input type="submit"  class="news_new-form" value="Yeni Haber Ekle">
+        </form>
+       
+      
+          <h1 ><a href="{% url 'news_list' %}"> HABER</a> </h1>
+          </div>
+         
+        <div class='menu'>
+          {% block categories %}
+             {% include "news/categories.html" %}
+          {% endblock %}
+        </div>
+        
+          
+    <!-- news -->
+    <div class="news">
+          {% block content %}
+
+          {% endblock %}
+        </div>  
+</div>
+
+</body>
+
+</html>

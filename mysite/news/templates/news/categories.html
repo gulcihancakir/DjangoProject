@@ -1,0 +1,17 @@
+{% block categories %}
+
+<ul class="a">
+  
+    <div class="duzenle-form">
+        <form action="{% url 'category_list'  %}">
+          {% csrf_token %}
+          <input type="submit" value="Düzenle">
+        </form></div>
+ {% for category in categories %}
+ <li><a href="{% url 'category_detail' pk=category.pk %}">{{category.name}}</a></li>
+  
+{% endfor %}
+</ul>
+
+
+{% endblock %}

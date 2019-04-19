@@ -1,0 +1,11 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block content %}
+    <p>Yeni Kategori</p>
+    <form method="POST" enctype="category-form" >{% csrf_token %}
+        {{ form.as_p }}
+        {% if user.is_authenticated %}
+        <button type="submit" class="save btn btn-default">Kaydet</button>
+        {% endif %}
+    </form>
+{% endblock %}

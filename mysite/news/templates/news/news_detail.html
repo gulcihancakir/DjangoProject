@@ -1,0 +1,32 @@
+{% extends 'news/base.html' %}
+
+{% load static %}
+<!-- Blog Post Detail-->
+
+{% block content %}
+
+<div class="news-detail">
+  <a href="{% url 'news_edit' pk=news.pk %}"><i class="fas fa-edit"></i></a>
+  <a href="{% url 'news_delete' pk=news.pk %}"><i class="fas fa-trash-alt"></i></a>
+  <a href="{%url 'news_like' pk=news.pk %}"><i class="fas fa-thumbs-up"></i></a>
+  <span>{{ news.like }}</span>
+
+  <a href="{%url 'news_dislike' pk=news.pk %}"><i class="fas fa-thumbs-down"></i></a>
+  <span>{{ news.dislike }}</span>
+
+  <p class="category_name">{{news.category.name}}-{{news.published_date}}</p>
+
+  {% if news.image %}
+      <img class="card-img-top" src="{{news.image.url}}" alt="Card image cap">
+     
+      
+      {% endif %}
+
+    <h4>{{news.title}}</h4>
+    <p><i class="fas fa-eye"></i> {{ news.views }} </p>
+    <p class="card-text">{{news.context}}</p>
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+.idea
+.vscode
+myvenv
+media
+__pycache__
