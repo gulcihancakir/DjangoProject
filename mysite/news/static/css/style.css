@@ -15,7 +15,7 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
-
+    
 
 }
 .header>h1>a{
@@ -28,6 +28,7 @@
 
     
 }
+
 .menu{
     background-color: #333;
     height: 50px;
@@ -138,7 +139,7 @@
     color:black;
     text-decoration: none;
 }
-.article-published_date{
+.article-published_date {
     opacity: 0.6;
     filter: alpha(opacity=60);
 }
@@ -185,9 +186,12 @@
 
    }
 
+  .comment{
+    border: 2px solid rgb(141, 141, 141);
+    background-color: white;
+  }
+  .comment-published_date{
+      color:gray;
+  }
   
-  
-
-
-
 

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import News,Category
+from .models import News,Category,Comment
 
 
 
@@ -17,5 +17,13 @@ class NewsForm(forms.ModelForm):
         model = News
         fields = ('title', 'context',  'image',  'category',  'created_date',  'published_date',)
 
+class CommentsForm(forms.ModelForm):
+  
+        
+    class Meta:
+        model=Comment
+        fields=('text','name',)
+
+   
 
 

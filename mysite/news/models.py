@@ -36,7 +36,16 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+class Comment(models.Model):
+  
+    text=models.TextField()
+    name= models.CharField(max_length=200)
+    published_date = models.DateTimeField(auto_now_add=True)
+    news=models.ForeignKey(News,on_delete=models.CASCADE)
 
 
+   
+    def __str__(self):
+        return self.name
 
 # Create your models here.

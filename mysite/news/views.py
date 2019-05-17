@@ -5,8 +5,8 @@ from django.utils import timezone
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.contrib.auth.models import User
 
-from .models import News, Category
-from .forms import NewsForm, CategoryForm
+from .models import News, Category,Comment
+from .forms import NewsForm, CategoryForm,CommentsForm
 context = {
     'categories':Category.objects.all()
 }
@@ -20,16 +20,32 @@ def news_list(request):
     return render(request, 'news/news_list.html',context)
 
 
-def news_detail(request: HttpRequest, pk):
+def news_detail(request, pk):
     context = {
     'categories':Category.objects.all()
+    
     }
     news = get_object_or_404(News, pk=pk)
-
-
     news.views += 1
     news.save()
+    
+    
+    form = CommentsForm(request.POST or None )
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.news=news
+        form.save()
+            
+   
+
+    
+
+    form = CommentsForm()
+    context['form']=form
     context['news']=news
+    
+    
+    
     return render(request, 'news/news_detail.html', context)
 
 
@@ -131,6 +147,7 @@ def category_new(request):
 
 
 def category_edit(request, pk):
+    
     context = {
     'categories':Category.objects.all()
     }
