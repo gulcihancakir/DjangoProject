@@ -1,5 +1,6 @@
 .idea
 .vscode
-myvenv
+venv
+env
 media
 __pycache__
